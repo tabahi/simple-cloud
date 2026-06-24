@@ -106,7 +106,7 @@ async function loadConfig() {
   }
 
   const cfg = {
-    serverUrl: str('SC_SERVER_URL', ''),
+    serverUrl: str('SC_SERVER_URL', '').replace(/\/+$/, ''),
     token: str('SC_TOKEN', ''),
     syncFolder: str('SC_SYNC_FOLDER', DEFAULT_SYNC_FOLDER),
     syncIntervalSeconds: int('SC_SYNC_INTERVAL_SECONDS', 300),

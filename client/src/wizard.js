@@ -54,7 +54,7 @@ async function runWizard(defaults, defaultSyncFolder) {
   while (!serverUrl) {
     const val = await inputBox(urlPrompt, 'simple-cloud Setup', defaults.serverUrl || 'https://');
     if (val === null) return null;
-    serverUrl = val.trim();
+    serverUrl = val.trim().replace(/\/+$/, '');
     if (!serverUrl) urlPrompt = 'Server URL is required.\n\nEnter the server URL (e.g. https://yourserver:11277):';
   }
 
