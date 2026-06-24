@@ -103,6 +103,9 @@ cat /opt/scserver/server/config/token.txt
 
 See **[client/README.md](client/README.md)** for full setup instructions.
 
+
+![Tray menu Preview](docs/tray_menu_preview.png)
+
 **Windows**: install [Node.js 20 LTS](https://nodejs.org/), open PowerShell, and run:
 
 ```powershell
