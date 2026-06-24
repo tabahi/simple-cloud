@@ -41,7 +41,7 @@ async function main() {
 
   const logLevel = config.logLevel || 'info';
   logger.transports.forEach(t => { t.level = logLevel; });
-  logger.info('simplecloudClient starting');
+  logger.info('simple-cloud client starting');
   logger.info(`Sync folder: ${config.syncFolder}`);
   logger.info(`Server: ${config.serverUrl}`);
   logger.info(`Sync interval: ${config.syncIntervalSeconds}s`);
@@ -108,7 +108,7 @@ async function main() {
     sync.runSync().catch(err => logger.error(`Sync interval error: ${err.message}`));
   }, config.syncIntervalSeconds * 1000);
 
-  logger.info('simplecloudClient running');
+  logger.info('simple-cloud client running');
 }
 
 main();

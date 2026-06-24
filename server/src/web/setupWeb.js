@@ -50,7 +50,7 @@ function readStdin() {
     const secret = totp.generateSecret();
     out.push('SC_WEB_TOTP_ENABLED=true');
     out.push(`SC_WEB_TOTP_SECRET=${secret}`);
-    out.push(`#OTPAUTH ${totp.otpauthURL(secret, { issuer: 'simplecloud', account: 'web' })}`);
+    out.push(`#OTPAUTH ${totp.otpauthURL(secret, { issuer: 'simple-cloud', account: 'web' })}`);
   }
 
   process.stdout.write(out.join('\n') + '\n');

@@ -389,7 +389,7 @@ async function handleIncomingAttachments(message, log) {
   }
 
   if (saved.length || failed.length) {
-    const embed = new EmbedBuilder().setTitle('simplecloud — file ingest');
+    const embed = new EmbedBuilder().setTitle('simple-cloud — file ingest');
     if (saved.length) embed.addFields({ name: '✅ Saved', value: saved.join('\n').slice(0, 1024) });
     if (failed.length) embed.addFields({ name: '⚠️ Skipped', value: failed.join('\n').slice(0, 1024) });
     embed.setColor(failed.length && !saved.length ? 0xff5555 : 0x55cc77);
@@ -420,7 +420,7 @@ async function handleStatus(interaction) {
   const disk = diskSpace();
 
   const embed = new EmbedBuilder()
-    .setTitle('📊 simplecloud server status')
+    .setTitle('📊 simple-cloud server status')
     .setColor(s.locked ? 0xcc5555 : 0x55cc77)
     .addFields(
       { name: 'Files stored', value: String(all.length), inline: true },

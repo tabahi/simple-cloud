@@ -1,10 +1,10 @@
-# simplecloud client
+# simple-cloud client
 
 Node.js sync client, runs on **Windows** (with system tray icon) and **Linux** (headless).
 
 ## Windows, install
 
-> The simplecloud **server** must already be running first. See the [server setup guide](../README.md#server-setup-linux) if it isn't.
+> The simple-cloud **server** must already be running first. See the [server setup guide](../README.md#server-setup-linux) if it isn't.
 
 ### Step 1, Install Node.js (skip if already installed)
 
@@ -25,10 +25,11 @@ Copy that long hex string, you'll paste it in a moment.
 Open **PowerShell** (press `Win + X` → *Terminal* or search "PowerShell" in Start) and paste:
 
 ```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 irm https://raw.githubusercontent.com/tabahi/simple-cloud/refs/heads/main/client/setup.ps1 | iex
 ```
 
-The script downloads simplecloud, installs dependencies, and launches the app. Three setup dialogs appear:
+The script downloads simple-cloud, installs dependencies, and launches the app. Three setup dialogs appear:
 
 - **Server URL**: the full address of your server, e.g. `https://yourserver.com:11277`
 - **Signing key**: paste the key from Step 2
@@ -42,7 +43,7 @@ A tray icon appears in your system tray (bottom-right corner, or the `^` overflo
 
 ## Linux, quick install
 
-> The simplecloud **server** must already be running first.
+> The simple-cloud **server** must already be running first.
 
 ```bash
 # from the client/ folder
@@ -100,7 +101,7 @@ cat /opt/scserver/config/token.txt
 
 | Variable | Default | Description |
 | --- | --- | --- |
-| `SC_SERVER_URL` |, | Full URL of the simplecloud server (required) |
+| `SC_SERVER_URL` |, | Full URL of the simple-cloud server (required) |
 | `SC_TOKEN` |, | Signing key from the server (required) — used for HMAC request signing, never sent on the wire |
 | `SC_SYNC_FOLDER` | `C:\simplecloudData` / `~/simplecloudData` | Local folder to sync |
 | `SC_SYNC_INTERVAL_SECONDS` | `300` | Fallback poll interval in seconds, SSE push handles real-time changes; this fires as a safety net when the stream is reconnecting |
@@ -198,11 +199,11 @@ node service\uninstall.js
 
 ## Auto-start on Linux (systemd)
 
-Create `/etc/systemd/system/simplecloud-client.service`:
+Create `/etc/systemd/system/simple-cloud-client.service`:
 
 ```ini
 [Unit]
-Description=simplecloud client
+Description=simple-cloud client
 After=network.target
 
 [Service]
@@ -216,7 +217,7 @@ WantedBy=multi-user.target
 ```
 
 ```bash
-sudo systemctl enable --now simplecloud-client
+sudo systemctl enable --now simple-cloud-client
 ```
 
 ## Logs

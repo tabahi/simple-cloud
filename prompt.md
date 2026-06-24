@@ -1,4 +1,4 @@
-# simplecloud — context for coding sessions
+# simple-cloud — context for coding sessions
 
 > Compressed map of this codebase. Skim this first, then open only the files your task touches. The codebase is fully implemented. When you change architecture, update the relevant line here in the same commit.
 

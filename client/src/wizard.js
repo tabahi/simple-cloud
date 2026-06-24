@@ -42,8 +42,8 @@ function messageBox(message, title, type) {
 // Returns { serverUrl, token, syncFolder } or null if user cancels.
 async function runWizard(defaults, defaultSyncFolder) {
   const welcomed = await messageBox(
-    'simplecloud needs to be configured before it can start.\n\nClick OK to set it up now, or Cancel to quit.',
-    'simplecloud Setup',
+    'simple-cloud needs to be configured before it can start.\n\nClick OK to set it up now, or Cancel to quit.',
+    'simple-cloud Setup',
     'yesno'
   );
   if (!welcomed) return null;
@@ -52,7 +52,7 @@ async function runWizard(defaults, defaultSyncFolder) {
   let serverUrl = '';
   let urlPrompt = 'Enter the server URL shown by setup.sh\n(e.g. https://yourserver:11277):';
   while (!serverUrl) {
-    const val = await inputBox(urlPrompt, 'simplecloud Setup', defaults.serverUrl || 'https://');
+    const val = await inputBox(urlPrompt, 'simple-cloud Setup', defaults.serverUrl || 'https://');
     if (val === null) return null;
     serverUrl = val.trim();
     if (!serverUrl) urlPrompt = 'Server URL is required.\n\nEnter the server URL (e.g. https://yourserver:11277):';
@@ -62,7 +62,7 @@ async function runWizard(defaults, defaultSyncFolder) {
   let token = '';
   let tokenPrompt = 'Enter the signing key from the server.\n(On the server: cat /opt/scserver/config/token.txt)\nThis key signs requests and is never sent on the wire.';
   while (!token) {
-    const val = await inputBox(tokenPrompt, 'simplecloud Setup', defaults.token || '');
+    const val = await inputBox(tokenPrompt, 'simple-cloud Setup', defaults.token || '');
     if (val === null) return null;
     token = val.trim();
     if (!token) tokenPrompt = 'Signing key is required.\n\nEnter the signing key from the server:';
@@ -72,7 +72,7 @@ async function runWizard(defaults, defaultSyncFolder) {
   let syncFolder = '';
   let folderPrompt = 'Local folder to sync:';
   while (!syncFolder) {
-    const val = await inputBox(folderPrompt, 'simplecloud Setup', defaults.syncFolder || defaultSyncFolder);
+    const val = await inputBox(folderPrompt, 'simple-cloud Setup', defaults.syncFolder || defaultSyncFolder);
     if (val === null) return null;
     syncFolder = val.trim();
     if (!syncFolder) folderPrompt = 'Sync folder is required.\n\nLocal folder to sync:';

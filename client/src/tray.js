@@ -73,7 +73,7 @@ const menuItems = [
     ],
   },
   { title: '<SEPARATOR>', tooltip: '', enabled: false, checked: false },
-  { title: 'Quit',        tooltip: 'Exit simplecloudClient', enabled: true, checked: false },
+  { title: 'Quit',        tooltip: 'Exit simple-cloud',      enabled: true, checked: false },
 ];
 
 async function startTray(config) {
@@ -96,7 +96,7 @@ async function startTray(config) {
     _tray = new SysTray({
       menu: {
         icon: ICON_BASE64,
-        title: 'simplecloud',
+        title: 'simple-cloud',
         tooltip: 'File Sync Client',
         items: menuItems,
       },
@@ -201,12 +201,12 @@ async function runDownloadBackups() {
       ? 'No backups found on the server.'
       : `Downloaded ${r.downloaded} of ${r.total} backup(s) into:\n${r.root}` +
         (r.failed ? `\n\n${r.failed} failed — see the log.` : '');
-    await messageBox(msg, 'simplecloud — backups', 'info');
+    await messageBox(msg, 'simple-cloud — backups', 'info');
     if (r.total > 0) exec(`explorer "${r.root}"`);
   } catch (e) {
     logger.error(`Backup download failed: ${e.message}`);
     setStatus('Idle');
-    await messageBox(`Backup download failed:\n${e.message}`, 'simplecloud — backups', 'warn');
+    await messageBox(`Backup download failed:\n${e.message}`, 'simple-cloud — backups', 'warn');
   } finally {
     _backupBusy = false;
   }
@@ -216,7 +216,7 @@ async function runClearBackups() {
   if (_backupBusy) return;
   const ok = await messageBox(
     'Delete ALL backups on the server and the local simplecloud-backups folder?\n\nThis cannot be undone.',
-    'simplecloud — clear backups',
+    'simple-cloud — clear backups',
     'yesno'
   );
   if (!ok) return;
@@ -229,13 +229,13 @@ async function runClearBackups() {
     await messageBox(
       `Cleared ${r.serverRemovedDateDirs} backup folder(s) on the server` +
         (r.localRemoved ? ' and the local copy.' : '.'),
-      'simplecloud — clear backups',
+      'simple-cloud — clear backups',
       'info'
     );
   } catch (e) {
     logger.error(`Clear backups failed: ${e.message}`);
     setStatus('Idle');
-    await messageBox(`Clear backups failed:\n${e.message}`, 'simplecloud — clear backups', 'warn');
+    await messageBox(`Clear backups failed:\n${e.message}`, 'simple-cloud — clear backups', 'warn');
   } finally {
     _backupBusy = false;
   }

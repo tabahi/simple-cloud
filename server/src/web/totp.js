@@ -105,7 +105,7 @@ function verify(token, secretBase32, window = 1, atMs = Date.now()) {
 }
 
 // Build an otpauth:// URL to show as a QR / paste into an authenticator app.
-function otpauthURL(secretBase32, { issuer = 'simplecloud', account = 'web' } = {}) {
+function otpauthURL(secretBase32, { issuer = 'simple-cloud', account = 'web' } = {}) {
   const label = encodeURIComponent(`${issuer}:${account}`);
   const params = new URLSearchParams({
     secret: secretBase32,

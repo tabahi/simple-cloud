@@ -11,7 +11,7 @@ const startupDir = path.join(
   process.env.APPDATA,
   'Microsoft', 'Windows', 'Start Menu', 'Programs', 'Startup'
 );
-const vbsDest = path.join(startupDir, 'simplecloudClient.vbs');
+const vbsDest = path.join(startupDir, 'simple-cloud-client.vbs');
 
 // Generate VBScript with absolute paths baked in
 const vbsContent = `Set objShell = CreateObject("WScript.Shell")
@@ -23,6 +23,6 @@ fs.writeFileSync(vbsDest, vbsContent, 'utf8');
 // Launch it now
 execSync(`wscript.exe "${vbsDest}"`, { stdio: 'ignore' });
 
-console.log('simplecloudClient installed.');
+console.log('simple-cloud client installed.');
 console.log(`Startup entry: ${vbsDest}`);
 console.log('The tray icon should appear momentarily. It will auto-start on every login.');

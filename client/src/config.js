@@ -27,10 +27,10 @@ const DEFAULT_SYNC_FOLDER = process.platform === 'win32'
   : path.join(os.homedir(), 'simplecloudData');
 
 // Template written on first run so the user has something to fill in.
-const ENV_TEMPLATE = `# simplecloud client configuration
+const ENV_TEMPLATE = `# simple-cloud client configuration
 # This file is read on startup. Fill in SC_SERVER_URL and SC_TOKEN, then rerun.
 
-# Full URL of the simplecloud server (required)
+# Full URL of the simple-cloud server (required)
 SC_SERVER_URL=https://alive.botup.top:24900
 
 # Signing key from the server (required) — see /opt/scserver/config/token.txt

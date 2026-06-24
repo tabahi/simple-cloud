@@ -1,4 +1,4 @@
-# simplecloud
+# simple-cloud
 
 Self-hosted cloud file-storage. Node.js server on a Linux VPS, Node.js client on Windows or Linux, with an optional web UI with 2FA and Discord bot.
 
@@ -11,7 +11,7 @@ Self-hosted cloud file-storage. Node.js server on a Linux VPS, Node.js client on
 ## Repository layout
 
 ```text
-simplecloud/
+simple-cloud/
 ├── server/   ← Fastify server (runs on Linux VPS)
 └── client/   ← Sync client (Windows + Linux)
 ```
@@ -104,6 +104,7 @@ See **[client/README.md](client/README.md)** for full setup instructions.
 **Windows**: install [Node.js 20 LTS](https://nodejs.org/), open PowerShell, and run:
 
 ```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 irm https://raw.githubusercontent.com/tabahi/simple-cloud/refs/heads/main/client/setup.ps1 | iex
 ```
 

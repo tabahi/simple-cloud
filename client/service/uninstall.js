@@ -7,7 +7,7 @@ const { execSync } = require('child_process');
 const vbsDest = path.join(
   process.env.APPDATA,
   'Microsoft', 'Windows', 'Start Menu', 'Programs', 'Startup',
-  'simplecloudClient.vbs'
+  'simple-cloud-client.vbs'
 );
 
 // Kill any running instance
