@@ -1,0 +1,4 @@
+node_modules/
+config/token.txt
+storage/
+logs/

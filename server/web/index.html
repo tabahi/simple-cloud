@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>simplecloud</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <!-- Login view -->
+  <section id="login" class="view">
+    <div class="card">
+      <h1>simplecloud</h1>
+      <p class="muted">Sign in to manage your files</p>
+      <p id="boot-warn" class="warn" role="alert" hidden></p>
+      <form id="login-form" autocomplete="off">
+        <label>Password
+          <input type="password" id="password" autocomplete="current-password" required />
+        </label>
+        <label id="totp-field" hidden>Authenticator code
+          <input type="text" id="totp" inputmode="numeric" pattern="\d{6}" maxlength="6"
+                 autocomplete="one-time-code" placeholder="123456" />
+        </label>
+        <button type="submit" id="login-btn">Sign in</button>
+        <p id="login-error" class="error" role="alert"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- App view -->
+  <section id="app" class="view" hidden>
+    <header class="topbar">
+      <strong>simplecloud</strong>
+      <span id="lock-badge" class="badge" title="Secure folder state"></span>
+      <span class="spacer"></span>
+      <span id="server-info" class="muted" title="Running build · process start time"></span>
+      <span id="stats" class="muted"></span>
+      <button id="refresh-btn" class="ghost">Refresh</button>
+      <button id="logout-btn" class="ghost">Sign out</button>
+    </header>
+
+    <nav class="crumbs" id="crumbs"></nav>
+
+    <div class="toolbar">
+      <input type="file" id="file-input" multiple hidden />
+      <button id="upload-btn">Upload here</button>
+      <input type="search" id="filter" placeholder="Filter in this folder…" />
+      <button id="backups-btn" class="ghost">Backups</button>
+    </div>
+
+    <div id="progress" class="progress" hidden></div>
+    <main id="listing" class="listing"></main>
+
+    <!-- Backups panel -->
+    <div id="backups-panel" class="panel" hidden>
+      <div class="panel-head">
+        <strong>Backups &amp; deleted files</strong>
+        <button id="backups-close" class="ghost">Close</button>
+      </div>
+      <div id="backups-body" class="panel-body"></div>
+    </div>
+  </section>
+
+  <script src="/app.js"></script>
+</body>
+</html>

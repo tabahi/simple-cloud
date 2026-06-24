@@ -1,0 +1,22 @@
+{
+  "name": "simplecloud-server",
+  "version": "1.0.0",
+  "description": "Self-hosted cloud file storage server",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "fastify": "^4",
+    "@fastify/multipart": "^8",
+    "@fastify/static": "^6",
+    "@fastify/cookie": "^9",
+    "better-sqlite3": "^9",
+    "discord.js": "^14",
+    "dotenv": "^16",
+    "pino": "^8",
+    "pino-roll": "^1",
+    "mime-types": "^2",
+    "uuid": "^9"
+  }
+}
