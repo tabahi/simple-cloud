@@ -2,6 +2,8 @@
 
 Self-hosted cloud file-storage. Node.js server on a Linux VPS, Node.js client on Windows or Linux, with an optional web UI with 2FA and Discord bot.
 
+![Web UI Preview](docs/webUI_preview.png)
+
 ## How it's different from Seafile / Nextcloud
 
 - **Simpler to run.** No Docker, no separate database, just Node.js and npm under PM2. The whole server is a small Fastify app. (`better-sqlite3` for embedded SQLite and the `7z` system package for the locked folder are the only non-JS pieces, both handled by the installer.)
