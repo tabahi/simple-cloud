@@ -1,6 +1,6 @@
 'use strict';
 
-const { listBackups, getBackupStream, clearAllBackups } = require('../backupService');
+const { listBackups, getBackupStream, clearAllBackups, resolveLogicalFilename } = require('../backupService');
 
 async function backupsRoute(fastify, _opts) {
   // List all backups grouped by date, with each backup's resolved logical path.
@@ -18,8 +18,12 @@ async function backupsRoute(fastify, _opts) {
     if (!stream) {
       return reply.code(404).send({ error: 'Backup not found' });
     }
+    const filename = resolveLogicalFilename(id);
     request.log.info({ action: 'backup-download', id, ip: request.ip }, 'backup downloaded');
-    return reply.header('Content-Type', 'application/octet-stream').send(stream);
+    return reply
+      .header('Content-Type', 'application/octet-stream')
+      .header('Content-Disposition', `attachment; filename="${filename}"`)
+      .send(stream);
   });
 
   // Clear ALL backups on the server.

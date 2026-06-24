@@ -1,5 +1,6 @@
 'use strict';
 
+const path = require('path');
 const mime = require('mime-types');
 const { getFile } = require('../db');
 const { getReadStream } = require('../storage');
@@ -24,9 +25,11 @@ async function downloadRoute(fastify, _opts) {
       'file downloaded'
     );
 
+    const filename = path.basename(filePath);
     return reply
       .header('Content-Type', contentType)
       .header('Content-Length', row.size)
+      .header('Content-Disposition', `attachment; filename="${filename}"`)
       .send(stream);
   });
 }

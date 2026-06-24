@@ -1,13 +1,13 @@
 :root {
-  --bg: #0f1115;
-  --panel: #181b22;
+  --bg: #27292d;
+  --panel: #1e2943;
   --panel-2: #20242e;
-  --text: #e6e8ec;
-  --muted: #8b93a3;
-  --accent: #4f8cff;
-  --danger: #ff5d5d;
-  --ok: #4fd18b;
-  --border: #2a2f3a;
+  --text: #cdd4e3;
+  --muted: #7c8494;
+  --accent: #006ba5;
+  --danger: #c52e2e;
+  --ok: #269258;
+  --border: #36393f;
 }
 
 * { box-sizing: border-box; }

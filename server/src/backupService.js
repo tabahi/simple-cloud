@@ -215,6 +215,23 @@ function getBackupStream(id) {
   return fs.createReadStream(abs);
 }
 
+// Return the basename of the logical file for use in Content-Disposition.
+function resolveLogicalFilename(id) {
+  if (typeof id !== 'string' || !id) return 'download';
+  if (id.startsWith(`${DELETIONS_DIR}/`)) {
+    const rest = id.slice(DELETIONS_DIR.length + 1);
+    const slash = rest.indexOf('/');
+    if (slash === -1) return 'download';
+    return path.basename(rest.slice(slash + 1)) || 'download';
+  }
+  const parts = id.split('/');
+  if (parts.length !== 2) return 'download';
+  const m = BACKUP_FILE_RE.exec(parts[1]);
+  if (!m) return 'download';
+  const logicalPath = resolveLogicalName(m[1], dbPathsByStorageId(), changelogPathsByStorageId());
+  return path.basename(logicalPath);
+}
+
 // Delete every backup date-dir under tempDir. Returns the count removed.
 // Does NOT touch the locked archive or live storage.
 function clearAllBackups(log) {
@@ -262,4 +279,4 @@ function clearAllBackups(log) {
   return removed;
 }
 
-module.exports = { listBackups, getBackupStream, clearAllBackups, resolveBackupPath };
+module.exports = { listBackups, getBackupStream, clearAllBackups, resolveBackupPath, resolveLogicalFilename };
