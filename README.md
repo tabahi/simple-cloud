@@ -191,6 +191,11 @@ An optional Discord bot for browsing cloud storage and uploading files from Disc
 
 Setup guide: <https://docs.vectorize.io/build-deploy/external-service-setup/how-to/discord/set-up-a-discord-bot/>
 
+
+
+
+![Discord Bot Preview](docs/discord_bot_preview.png)
+
 ### Setup
 
 1. **Create a bot** at <https://discord.com/developers/applications> → *New Application* → *Bot*.
@@ -238,7 +243,7 @@ Setup guide: <https://docs.vectorize.io/build-deploy/external-service-setup/how-
 
 > If both `SC_DISCORD_ALLOWED_USER_IDS` and `SC_DISCORD_ALLOWED_CHANNEL_IDS` are empty, the bot ignores everyone. Add at least one ID to enable it.
 
-## Web UI (optional)
+## Web UI
 
 A browser UI for managing files,  browse, upload, download, delete (recycle bin), view backups, see lock state. Off by default.
 
