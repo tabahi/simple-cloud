@@ -7,7 +7,7 @@ $ProgressPreference    = 'SilentlyContinue'   # faster Invoke-WebRequest on PS5
 
 $installDir  = Join-Path $env:LOCALAPPDATA 'simplecloud-client'
 $zipUrl      = 'https://github.com/tabahi/simple-cloud/archive/refs/heads/main.zip'
-$tempZip     = Join-Path $env:TEMP 'simplecloud-main.zip'
+$tempZip     = Join-Path $env:TEMP 'simple-cloud-main.zip'
 $tempExtract = Join-Path $env:TEMP 'simplecloud-extract'
 
 function Show-Box($msg, $title, $icon) {
@@ -38,7 +38,7 @@ try {
 
     Write-Host "Installing to $installDir..." -ForegroundColor Cyan
     if (Test-Path $installDir) { Remove-Item $installDir -Recurse -Force }
-    Move-Item "$tempExtract\simplecloud-main\client" $installDir
+    Move-Item "$tempExtract\simple-cloud-main\client" $installDir
 
     Write-Host 'Installing dependencies...' -ForegroundColor Cyan
     Set-Location $installDir
