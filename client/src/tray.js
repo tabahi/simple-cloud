@@ -153,7 +153,7 @@ function messageBox(message, title, type) {
   return new Promise((resolve) => {
     const buttons = type === 'yesno' ? 4 : 0;
     const icon    = type === 'warn' || type === 'yesno' ? 48 : 64;
-    const esc = (s) => s.replace(/'/g, "''");
+    const esc = (s) => s.replace(/'/g, "''").replace(/\n/g, "' + [char]10 + '");
     const ps =
       `Add-Type -AssemblyName PresentationFramework; ` +
       `$r=[System.Windows.MessageBox]::Show('${esc(message)}','${esc(title)}',${buttons},${icon}); ` +
