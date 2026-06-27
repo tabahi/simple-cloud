@@ -80,7 +80,7 @@ try {
 
             $token = Prompt-Required `
                 ("Enter the signing key from the server." + [char]10 + [char]10 +
-                 "On the server, run:  cat /opt/scserver/config/token.txt") `
+                 "On the server, run:  cat /opt/scserver/server/config/token.txt") `
                 'simple-cloud — Signing Key' ''
 
             $syncFolder = Prompt-Required `
