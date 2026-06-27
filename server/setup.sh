@@ -27,6 +27,7 @@ if [[ -z "${BASH_SOURCE[0]:-}" || "${BASH_SOURCE[0]}" == "bash" || "${BASH_SOURC
   if command -v git &>/dev/null; then
     if [[ -d "$INSTALL_ROOT/.git" ]]; then
       git -C "$INSTALL_ROOT" pull --ff-only
+      git -C "$INSTALL_ROOT" checkout -- .
     else
       mkdir -p "$(dirname "$INSTALL_ROOT")"
       git clone --depth 1 https://github.com/tabahi/simple-cloud.git "$INSTALL_ROOT" 2>/dev/null \
