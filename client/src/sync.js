@@ -315,6 +315,14 @@ function pruneEmptyLockedFolder() {
   }
 }
 
+// Grace period after a local upload during which we will NOT download the same
+// file from the server. The server's modified_at reflects receive time (always
+// slightly after the local save time), so without this guard, every upload is
+// immediately followed by a spurious download that overwrites active edits.
+const UPLOAD_GRACE_MS = 60_000;
+// rel → timestamp of last uploadSafe/syncSingleFile enqueue for that path
+const _recentUploads = new Map();
+
 let syncPaused = false;
 let authErrorPaused = false;
 let _isSyncing = false;
@@ -496,6 +504,13 @@ async function runSync() {
             // Our pending op will produce the authoritative version — don't overwrite it.
             continue;
           }
+          const lastUpload = _recentUploads.get(rel);
+          if (lastUpload && Date.now() - lastUpload < UPLOAD_GRACE_MS) {
+            // We uploaded this file recently; the server's newer timestamp is
+            // upload-receive lag, not a change from another client. Skip to
+            // avoid overwriting an actively-edited file.
+            continue;
+          }
           // Server version is strictly newer → download
           await downloadSafe(rel, localAbs);
         }
@@ -530,6 +545,7 @@ async function runSync() {
 function uploadSafe(rel, abs) {
   deleteQueue.cancel(rel);  // stale pending delete would clobber this upload
   unmarkDeleted(rel);       // file is being (re)created; treat as present now
+  _recentUploads.set(rel, Date.now());
   uploadQueue.enqueue(rel, abs, (ok) => {
     if (ok) unmarkDeleted(rel); // idempotent — keeps the success path explicit
   });
@@ -580,6 +596,7 @@ async function syncSingleFile(localAbs) {
   // Drop any pending delete so it doesn't clobber the upload that follows.
   deleteQueue.cancel(rel);
   unmarkDeleted(rel); // file is being (re)created; treat as present immediately
+  _recentUploads.set(rel, Date.now());
   // Route through the shared serial queue so watcher uploads never run
   // concurrently with sync-loop uploads and the rate-limit backoff applies.
   uploadQueue.enqueue(rel, localAbs, (ok) => {

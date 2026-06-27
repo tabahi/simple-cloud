@@ -8,9 +8,10 @@ const sync = require('./sync');
 const selfWrites = require('./selfWrites');
 
 // Debounce map: relativePath → timeout handle
-// Prevents flooding the server when an editor writes a file in many small chunks
+// 3 s quiet window before uploading — prevents flooding during active editing sessions
+// where files are saved every few seconds. The upload queue deduplicates further.
 const debounceMap = new Map();
-const DEBOUNCE_MS = 500;
+const DEBOUNCE_MS = 3000;
 
 function debounce(key, fn) {
   if (debounceMap.has(key)) clearTimeout(debounceMap.get(key));

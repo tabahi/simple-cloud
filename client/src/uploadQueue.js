@@ -49,12 +49,18 @@ function sleep(ms) {
 function enqueue(rel, abs, onResult) {
   const existing = _pending.get(rel);
   if (existing) {
-    existing.abs = abs; // refresh to the newest path/content
+    // A newer version arrived. Update abs so we can re-upload it after the
+    // current upload finishes (the running api.uploadFile already captured the
+    // old path by value, so this doesn't affect the in-flight request).
+    if (existing.abs !== abs) {
+      existing.abs = abs;
+      existing._requeue = true;
+    }
     if (onResult) existing.extraCallbacks.push(onResult);
     logger.debug(`Upload queue: ${rel} already queued, refreshed`);
     return;
   }
-  _pending.set(rel, { abs, attempts: 0, extraCallbacks: onResult ? [onResult] : [] });
+  _pending.set(rel, { abs, attempts: 0, extraCallbacks: onResult ? [onResult] : [], _requeue: false });
   logger.debug(`Upload queue: enqueued ${rel} (size ${_pending.size})`);
   _run();
 }
@@ -105,6 +111,13 @@ async function _run() {
       const ok = result === 'ok';
       for (const cb of item.extraCallbacks) {
         try { cb(ok, result); } catch (_) { /* ignore callback errors */ }
+      }
+
+      // If a newer version of the file arrived while the upload was in flight,
+      // item.abs was updated in place. Re-enqueue so that version gets uploaded.
+      if (ok && item._requeue) {
+        enqueue(rel, item.abs);
+        logger.debug(`Upload queue: re-enqueued ${rel} (newer version arrived during upload)`);
       }
     }
   } finally {
