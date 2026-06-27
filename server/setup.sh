@@ -43,7 +43,7 @@ if [[ -z "${BASH_SOURCE[0]:-}" || "${BASH_SOURCE[0]}" == "bash" || "${BASH_SOURC
     SCRIPT_DIR="$INSTALL_ROOT"
   fi
   DOWNLOADED_REPO="$INSTALL_ROOT"
-  exec bash "$SCRIPT_DIR/setup.sh" "$@"
+  exec bash "$SCRIPT_DIR/setup.sh" "$@" </dev/tty
 fi
 
 # ── normal (local) execution path ─────────────────────────────────────────────
